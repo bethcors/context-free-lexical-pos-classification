@@ -19,7 +19,7 @@ This study investigates how much grammatical information can be inferred from is
 
 1. Rule-Based Suffix Baseline
 2. Statistical Suffix Model
-3. Character N-gram Linear Model
+3. Character N-gram Model
 4. Character-Level BiLSTM
 
 The models are evaluated under coarse-grained and fine-grained POS classification settings.
@@ -88,7 +88,7 @@ Uses manually specified suffix-to-POS mappings. When multiple suffixes match a l
 
 Learns empirical suffix-to-POS associations from the training data using suffixes of lengths 1–5 characters.
 
-### Character N-gram Linear Model
+### Character N-gram Model
 
 Represents lexical forms using hashed character n-grams of lengths 2–5 and performs classification using stochastic gradient descent with logistic loss.
 
@@ -138,14 +138,10 @@ context-free-lexical-pos-classification/
 ├── CITATION.cff
 │
 ├── notebooks/
-│   └── pos_inference_revised.ipynb
+│   └── lexical_pos_classification_experiments.ipynb
 │
 ├── config/
-│   ├── experiment_config.json
-│   ├── coarse_tag_mapping.csv
-│   ├── fine_tag_list.csv
-│   ├── suffix_rules.csv
-│   └── holdout_suffixes.csv
+│   ├── experimental_configuration.json
 │
 ├── data/
 │   └── README.md
@@ -155,12 +151,15 @@ context-free-lexical-pos-classification/
 │   └── standard_split_indices.csv
 │
 ├── results/
-│   ├── coarse_results.csv
-│   ├── fine_results.csv
-│   ├── suffix_holdout_results.csv
-│   ├── bootstrap_confidence_intervals.csv
-│   ├── paired_randomization_tests.csv
+│   ├── coarse_test_predictions.csv
+│   ├── fine_test_predictions.csv
+│   ├── standard_results.csv
+│   ├── suffix_holdout_classwise.csv
+│   ├── suffix_holdout_per_family.csv
+│   ├── paired_tests_coarse.csv
+│   ├── paired_tests_fine.csv
 │   └── function_class_results.csv
+│   └── hash_collision_audit.csv
 │
 └── figures/
     ├── convergence/
