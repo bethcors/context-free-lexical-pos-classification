@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this software or its associated materials, please cite this repository."
+
+title: "A Context-Free Framework for Evaluating Morphological Generalization in Lexical POS Classification"
+
+type: software
+
+authors:
+  - family-names: "Coronel"
+    given-names: "Lilibeth P."
+    affiliation: "Mindanao State University at Naawan"
+
+  - family-names: "Emperador"
+    given-names: "Emmylou A."
+    affiliation: "Mindanao State University at Naawan"
+
+  - family-names: "Ambato"
+    given-names: "Gergie A."
+    affiliation: "Mindanao State University at Naawan"
+
+version: "1.0.0"
+
+date-released: "2026-10-06"
+
+license: "MIT"
+
+repository-code: "https://github.com/bethcors/context-free-lexical-pos-classification"
+
+keywords:
+  - "lexical POS classification"
+  - "computational morphology"
+  - "morphological generalization"
+  - "character-level modeling"
+  - "suffix hold-out evaluation"
