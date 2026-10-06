@@ -1,0 +1,357 @@
+{
+  "data": {
+    "data_file": "words_pos.csv",
+    "word_column": "word",
+    "label_column": "pos_tag",
+    "normalization": "strip and lowercase",
+    "alphabetic_only": true,
+    "duplicate_handling": "duplicate word-label pairs removed after normalization",
+    "fine_grained_minimum_count": 50
+  },
+  "standard_split": {
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15,
+    "test_fraction": 0.15,
+    "stratified": true,
+    "random_seed": 42
+  },
+  "random_seeds": {
+    "primary_seed": 42
+  },
+  "tasks": {
+    "coarse": {
+      "label_column": "coarse_tag",
+      "classes": [
+        "NOUN",
+        "VERB",
+        "ADJ",
+        "ADV",
+        "FUNCTION"
+      ]
+    },
+    "fine": {
+      "label_column": "pos_tag",
+      "minimum_class_count": 50
+    }
+  },
+  "majority_baseline": {
+    "prediction_rule": "most frequent label in the training partition"
+  },
+  "rule_based_model": {
+    "matching_strategy": "longest matching suffix",
+    "fallback": "majority class of the corresponding training partition",
+    "coarse_rules": [
+      [
+        "tion",
+        "NOUN"
+      ],
+      [
+        "sion",
+        "NOUN"
+      ],
+      [
+        "ment",
+        "NOUN"
+      ],
+      [
+        "ness",
+        "NOUN"
+      ],
+      [
+        "ity",
+        "NOUN"
+      ],
+      [
+        "ism",
+        "NOUN"
+      ],
+      [
+        "ist",
+        "NOUN"
+      ],
+      [
+        "ly",
+        "ADV"
+      ],
+      [
+        "ous",
+        "ADJ"
+      ],
+      [
+        "ive",
+        "ADJ"
+      ],
+      [
+        "able",
+        "ADJ"
+      ],
+      [
+        "ible",
+        "ADJ"
+      ],
+      [
+        "al",
+        "ADJ"
+      ],
+      [
+        "ic",
+        "ADJ"
+      ],
+      [
+        "ful",
+        "ADJ"
+      ],
+      [
+        "less",
+        "ADJ"
+      ],
+      [
+        "ish",
+        "ADJ"
+      ],
+      [
+        "ing",
+        "VERB"
+      ],
+      [
+        "ed",
+        "VERB"
+      ],
+      [
+        "en",
+        "VERB"
+      ],
+      [
+        "ize",
+        "VERB"
+      ],
+      [
+        "ise",
+        "VERB"
+      ]
+    ],
+    "fine_rules": [
+      [
+        "tion",
+        "NN"
+      ],
+      [
+        "sion",
+        "NN"
+      ],
+      [
+        "ment",
+        "NN"
+      ],
+      [
+        "ness",
+        "NN"
+      ],
+      [
+        "ity",
+        "NN"
+      ],
+      [
+        "ism",
+        "NN"
+      ],
+      [
+        "ist",
+        "NN"
+      ],
+      [
+        "ly",
+        "RB"
+      ],
+      [
+        "ous",
+        "JJ"
+      ],
+      [
+        "ive",
+        "JJ"
+      ],
+      [
+        "able",
+        "JJ"
+      ],
+      [
+        "ible",
+        "JJ"
+      ],
+      [
+        "al",
+        "JJ"
+      ],
+      [
+        "ic",
+        "JJ"
+      ],
+      [
+        "ful",
+        "JJ"
+      ],
+      [
+        "less",
+        "JJ"
+      ],
+      [
+        "ish",
+        "JJ"
+      ],
+      [
+        "ing",
+        "VBG"
+      ],
+      [
+        "ed",
+        "VBD"
+      ],
+      [
+        "en",
+        "VBN"
+      ],
+      [
+        "ize",
+        "VB"
+      ],
+      [
+        "ise",
+        "VB"
+      ]
+    ]
+  },
+  "learned_suffix_model": {
+    "minimum_suffix_length": 1,
+    "maximum_suffix_length": 5,
+    "matching_strategy": "longest observed matching suffix",
+    "label_estimation": "empirical suffix-label frequency",
+    "smoothing": "none",
+    "unseen_suffix_fallback": "majority class of training partition"
+  },
+  "character_ngram_sgd": {
+    "vectorizer": "HashingVectorizer",
+    "analyzer": "char",
+    "n_features": 262144,
+    "ngram_range": [
+      2,
+      5
+    ],
+    "alternate_sign": false,
+    "norm": "l2",
+    "classifier": "SGDClassifier",
+    "loss": "log_loss",
+    "penalty": "l2",
+    "alpha": 0.0001,
+    "learning_rate": "optimal",
+    "max_epochs": 20,
+    "early_stopping_patience": 3,
+    "batch_size": 50000,
+    "selection_metric": "validation Macro-F1"
+  },
+  "bilstm": {
+    "input_unit": "character",
+    "max_word_length": 30,
+    "embedding_dim": 64,
+    "hidden_dim_per_direction": 128,
+    "bidirectional": true,
+    "sequence_representation": "final forward and backward hidden states",
+    "batch_size": 256,
+    "loss": "class-weighted cross-entropy",
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "learning_rate_schedule": "fixed",
+    "max_epochs": 20,
+    "early_stopping_patience": 3,
+    "selection_metric": "validation Macro-F1",
+    "padding": "packed variable-length sequences",
+    "checkpointing": "best validation Macro-F1 state copied using deepcopy"
+  },
+  "evaluation": {
+    "primary_metric": "Macro-F1",
+    "additional_metrics": [
+      "Accuracy"
+    ],
+    "standard_macro_f1": "computed over task label set",
+    "holdout_macro_f1": "computed only over classes present in the ground-truth held-out suffix-family test subset",
+    "zero_division": 0
+  },
+  "uncertainty": {
+    "bootstrap_repetitions": 2000,
+    "confidence_level": 0.95,
+    "function_recall_interval": "Clopper-Pearson exact interval"
+  },
+  "paired_significance_tests": {
+    "method": "paired randomization test on Macro-F1",
+    "repetitions": 2000,
+    "comparisons": [
+      [
+        "Rule-based suffix",
+        "Statistical suffix"
+      ],
+      [
+        "Statistical suffix",
+        "Char N-gram"
+      ],
+      [
+        "Char N-gram",
+        "BiLSTM"
+      ]
+    ],
+    "multiple_testing_correction": "Holm",
+    "alpha": 0.05
+  },
+  "suffix_holdout": {
+    "common_suffix_inventory": [
+      "tion",
+      "sion",
+      "ment",
+      "ness",
+      "ity",
+      "ism",
+      "ist",
+      "ous",
+      "ive",
+      "able",
+      "ible",
+      "ful",
+      "less",
+      "ish",
+      "al",
+      "ic",
+      "ly",
+      "ing",
+      "ed",
+      "en",
+      "er",
+      "est"
+    ],
+    "primary_holdout_suffixes": [
+      "tion",
+      "ness",
+      "ly",
+      "ing"
+    ],
+    "family_assignment": "longest matching suffix",
+    "unmatched_family": "OTHER",
+    "evaluation_strategy": "one suffix family held out at a time",
+    "training_pool": "all observations not assigned to the held-out family",
+    "training_fraction_of_non_holdout_pool": 0.85,
+    "validation_fraction_of_non_holdout_pool": 0.15,
+    "validation_split_seed": 42,
+    "held_out_test_set": "all observations assigned to the selected suffix family",
+    "rule_full_reference": "retains the held-out suffix rule and is treated only as an external linguistic-reference condition",
+    "rule_masked": "removes the corresponding held-out suffix rule",
+    "macro_f1_definition": "classes with zero ground-truth support in the held-out test subset are excluded"
+  },
+  "software_environment": {
+    "python_version": "3.9.12",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "numpy_version": "1.21.5",
+    "pandas_version": "1.4.2",
+    "scikit_learn_version": "1.1.3",
+    "pytorch_version": "2.8.0",
+    "cuda_available": false,
+    "device": "CPU"
+  }
+}
