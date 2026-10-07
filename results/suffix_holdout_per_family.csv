@@ -1,0 +1,25 @@
+held_out_suffix,train_n,validation_n,test_n,classes_present,n_classes_present,class_support,model,macro_f1_present_classes,accuracy,seed
+tion,308426,54429,7245,NOUN,1,"{""NOUN"": 7245}",Majority-class baseline,1.0,1.0,42
+tion,308426,54429,7245,NOUN,1,"{""NOUN"": 7245}",Rule-based suffix (full reference),1.0,1.0,42
+tion,308426,54429,7245,NOUN,1,"{""NOUN"": 7245}",Rule-based suffix (masked),1.0,1.0,42
+tion,308426,54429,7245,NOUN,1,"{""NOUN"": 7245}",Statistical suffix,1.0,1.0,42
+tion,308426,54429,7245,NOUN,1,"{""NOUN"": 7245}",Char N-gram,0.973068746,0.947550035,42
+tion,308426,54429,7245,NOUN,1,"{""NOUN"": 7245}",BiLSTM,0.999861955,0.999723948,42
+ness,306455,54081,9564,NOUN,1,"{""NOUN"": 9564}",Majority-class baseline,1.0,1.0,42
+ness,306455,54081,9564,NOUN,1,"{""NOUN"": 9564}",Rule-based suffix (full reference),1.0,1.0,42
+ness,306455,54081,9564,NOUN,1,"{""NOUN"": 9564}",Rule-based suffix (masked),1.0,1.0,42
+ness,306455,54081,9564,NOUN,1,"{""NOUN"": 9564}",Statistical suffix,1.0,1.0,42
+ness,306455,54081,9564,NOUN,1,"{""NOUN"": 9564}",Char N-gram,0.752250489,0.602885822,42
+ness,306455,54081,9564,NOUN,1,"{""NOUN"": 9564}",BiLSTM,0.999947718,0.999895441,42
+ly,300399,53012,16689,"ADJ,ADV,NOUN,VERB",4,"{""ADJ"": 15, ""ADV"": 16114, ""NOUN"": 559, ""VERB"": 1}",Majority-class baseline,0.016204777,0.033495117,42
+ly,300399,53012,16689,"ADJ,ADV,NOUN,VERB",4,"{""ADJ"": 15, ""ADV"": 16114, ""NOUN"": 559, ""VERB"": 1}",Rule-based suffix (full reference),0.245617779,0.965546168,42
+ly,300399,53012,16689,"ADJ,ADV,NOUN,VERB",4,"{""ADJ"": 15, ""ADV"": 16114, ""NOUN"": 559, ""VERB"": 1}",Rule-based suffix (masked),0.016204777,0.033495117,42
+ly,300399,53012,16689,"ADJ,ADV,NOUN,VERB",4,"{""ADJ"": 15, ""ADV"": 16114, ""NOUN"": 559, ""VERB"": 1}",Statistical suffix,0.016204777,0.033495117,42
+ly,300399,53012,16689,"ADJ,ADV,NOUN,VERB",4,"{""ADJ"": 15, ""ADV"": 16114, ""NOUN"": 559, ""VERB"": 1}",Char N-gram,0.030526146,0.034094314,42
+ly,300399,53012,16689,"ADJ,ADV,NOUN,VERB",4,"{""ADJ"": 15, ""ADV"": 16114, ""NOUN"": 559, ""VERB"": 1}",BiLSTM,0.024724565,0.037749416,42
+ing,299183,52798,18119,"ADJ,FUNCTION,NOUN,VERB",4,"{""ADJ"": 3, ""FUNCTION"": 1, ""NOUN"": 1200, ""VERB"": 16915}",Majority-class baseline,0.031057508,0.066228821,42
+ing,299183,52798,18119,"ADJ,FUNCTION,NOUN,VERB",4,"{""ADJ"": 3, ""FUNCTION"": 1, ""NOUN"": 1200, ""VERB"": 16915}",Rule-based suffix (full reference),0.241408346,0.933550417,42
+ing,299183,52798,18119,"ADJ,FUNCTION,NOUN,VERB",4,"{""ADJ"": 3, ""FUNCTION"": 1, ""NOUN"": 1200, ""VERB"": 16915}",Rule-based suffix (masked),0.031057508,0.066228821,42
+ing,299183,52798,18119,"ADJ,FUNCTION,NOUN,VERB",4,"{""ADJ"": 3, ""FUNCTION"": 1, ""NOUN"": 1200, ""VERB"": 16915}",Statistical suffix,0.031057508,0.066228821,42
+ing,299183,52798,18119,"ADJ,FUNCTION,NOUN,VERB",4,"{""ADJ"": 3, ""FUNCTION"": 1, ""NOUN"": 1200, ""VERB"": 16915}",Char N-gram,0.038153258,0.076880623,42
+ing,299183,52798,18119,"ADJ,FUNCTION,NOUN,VERB",4,"{""ADJ"": 3, ""FUNCTION"": 1, ""NOUN"": 1200, ""VERB"": 16915}",BiLSTM,0.0322233,0.066008058,42

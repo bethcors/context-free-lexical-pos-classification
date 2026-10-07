@@ -1,0 +1,61 @@
+held_out_suffix,model,class,support,f1
+tion,Majority-class baseline,NOUN,7245,1.0
+tion,Rule-based suffix (full reference),NOUN,7245,1.0
+tion,Rule-based suffix (masked),NOUN,7245,1.0
+tion,Statistical suffix,NOUN,7245,1.0
+tion,Char N-gram,NOUN,7245,0.9730687455705174
+tion,BiLSTM,NOUN,7245,0.9998619547211486
+ness,Majority-class baseline,NOUN,9564,1.0
+ness,Rule-based suffix (full reference),NOUN,9564,1.0
+ness,Rule-based suffix (masked),NOUN,9564,1.0
+ness,Statistical suffix,NOUN,9564,1.0
+ness,Char N-gram,NOUN,9564,0.7522504892367906
+ness,BiLSTM,NOUN,9564,0.9999477178857112
+ly,Majority-class baseline,ADJ,15,0.0
+ly,Majority-class baseline,ADV,16114,0.0
+ly,Majority-class baseline,NOUN,559,0.0648191094619665
+ly,Majority-class baseline,VERB,1,0.0
+ly,Rule-based suffix (full reference),ADJ,15,0.0
+ly,Rule-based suffix (full reference),ADV,16114,0.982471115446758
+ly,Rule-based suffix (full reference),NOUN,559,0.0
+ly,Rule-based suffix (full reference),VERB,1,0.0
+ly,Rule-based suffix (masked),ADJ,15,0.0
+ly,Rule-based suffix (masked),ADV,16114,0.0
+ly,Rule-based suffix (masked),NOUN,559,0.0648191094619665
+ly,Rule-based suffix (masked),VERB,1,0.0
+ly,Statistical suffix,ADJ,15,0.0
+ly,Statistical suffix,ADV,16114,0.0
+ly,Statistical suffix,NOUN,559,0.0648191094619665
+ly,Statistical suffix,VERB,1,0.0
+ly,Char N-gram,ADJ,15,0.001048584411045
+ly,Char N-gram,ADV,16114,0.0056927170348369
+ly,Char N-gram,NOUN,559,0.115363283416528
+ly,Char N-gram,VERB,1,0.0
+ly,BiLSTM,ADJ,15,0.0038876889848812
+ly,BiLSTM,ADV,16114,0.014294516327788
+ly,BiLSTM,NOUN,559,0.0807160553024854
+ly,BiLSTM,VERB,1,0.0
+ing,Majority-class baseline,ADJ,3,0.0
+ing,Majority-class baseline,FUNCTION,1,0.0
+ing,Majority-class baseline,NOUN,1200,0.1242300326103835
+ing,Majority-class baseline,VERB,16915,0.0
+ing,Rule-based suffix (full reference),ADJ,3,0.0
+ing,Rule-based suffix (full reference),FUNCTION,1,0.0
+ing,Rule-based suffix (full reference),NOUN,1200,0.0
+ing,Rule-based suffix (full reference),VERB,16915,0.965633384711994
+ing,Rule-based suffix (masked),ADJ,3,0.0
+ing,Rule-based suffix (masked),FUNCTION,1,0.0
+ing,Rule-based suffix (masked),NOUN,1200,0.1242300326103835
+ing,Rule-based suffix (masked),VERB,16915,0.0
+ing,Statistical suffix,ADJ,3,0.0
+ing,Statistical suffix,FUNCTION,1,0.0
+ing,Statistical suffix,NOUN,1200,0.1242300326103835
+ing,Statistical suffix,VERB,16915,0.0
+ing,Char N-gram,ADJ,3,0.0
+ing,Char N-gram,FUNCTION,1,0.0
+ing,Char N-gram,NOUN,1200,0.1243243243243243
+ing,Char N-gram,VERB,16915,0.0282887077997671
+ing,BiLSTM,ADJ,3,0.0
+ing,BiLSTM,FUNCTION,1,0.0
+ing,BiLSTM,NOUN,1200,0.1288931996982433
+ing,BiLSTM,VERB,16915,0.0
