@@ -1,0 +1,7 @@
+{
+  "n_features": 262144,
+  "unique_character_ngrams": 261660,
+  "occupied_hash_bins": 165593,
+  "collisions": 96067,
+  "collision_rate": 0.3671443858442253
+}
