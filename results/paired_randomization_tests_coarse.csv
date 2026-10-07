@@ -1,4 +1,0 @@
-model_a,model_b,delta_macro_f1_b_minus_a,p_raw,p_holm,significant_after_holm
-Rule-based suffix,Statistical suffix,0.0600858292407225,0.0004997501249375,0.0014992503748125,True
-Statistical suffix,Char N-gram,-0.0213354246825666,0.0499750124937531,0.0499750124937531,True
-Char N-gram,BiLSTM,0.1124008201535328,0.0004997501249375,0.0014992503748125,True
