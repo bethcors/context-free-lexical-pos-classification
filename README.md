@@ -1,58 +1,47 @@
-# context-free-lexical-pos-classification
-Reproducibility materials for context-free lexical POS classification and suffix hold-out evaluation of morphological generalization.
 # A Context-Free Framework for Evaluating Morphological Generalization in Lexical POS Classification
 
-This repository contains the code, experimental configurations, data-split specifications, evaluation procedures, and reproducibility materials associated with the study:
+This repository contains the reproducibility materials for the study:
 
 **A Context-Free Framework for Evaluating Morphological Generalization in Lexical POS Classification**
 
-**Authors:**  
-Lilibeth P. Coronel  
-Emmylou A. Emperador  
-Gergie A. Ambato  
-
-Mindanao State University at Naawan, Philippines
+**Authors:** Lilibeth P. Coronel, Emmylou A. Emperador, and Gergie A. Ambato  
+**Affiliation:** Mindanao State University at Naawan, Philippines
 
 ## Overview
 
-This study investigates how much grammatical information can be inferred from isolated lexical forms without sentence context. It evaluates context-free lexical part-of-speech (POS) classification using a majority-class baseline and four morphology-sensitive computational approaches:
+This study investigates how much part-of-speech (POS) information can be inferred from isolated English word forms without sentence context.
 
-1. Rule-Based Suffix Baseline
-2. Statistical Suffix Model
-3. Character N-gram Model
-4. Character-Level BiLSTM
+The experimental framework evaluates a majority-class baseline and four morphology-sensitive approaches:
 
-The models are evaluated under coarse-grained and fine-grained POS classification settings.
+1. Majority-class baseline
+2. Rule-based suffix baseline
+3. Statistical suffix model
+4. Character N-gram linear model
+5. Character-level BiLSTM
 
-The study also introduces a suffix hold-out evaluation protocol to examine whether model performance transfers to morphological families excluded from training. The primary held-out suffix families are:
+Models are evaluated under coarse-grained and fine-grained lexical POS classification.
 
-- `-tion`
-- `-ness`
-- `-ly`
-- `-ing`
+Morphological generalization is further examined using a suffix hold-out protocol in which selected morphological families are excluded from model training.
 
 ## Dataset
 
-The experiments use the **370k English Words Corpus** distributed through Kaggle.
+The experiments use the **370k English Words Corpus** distributed through Kaggle. The dataset contains 370,100 English word types with automatically assigned Penn Treebank-style POS labels.
 
-The source dataset contains 370,100 English word types with automatically assigned POS labels. The study uses Penn Treebank-style POS categories.
+The original dataset is **not redistributed in this repository**. Users should obtain the dataset from its original source:
 
-The original dataset is **not redistributed in this repository**. Users should obtain the dataset from its original source.
+**Kaggle dataset:**  
+Ruchi Bhatia, *Part-of-Speech Tagging / 370k English Words Corpus*  
+https://www.kaggle.com/datasets/ruchi798/part-of-speech-tagging
 
-Dataset source:
+Before analysis, lexical forms are stripped of surrounding whitespace and converted to lowercase. The dataset is audited for missing values, duplicate lexical forms, duplicate word-label pairs, and nonalphabetic entries.
 
-**370k English Words Corpus / Part-of-Speech Tagging Dataset**  
-Kaggle, distributed by Ruchi Bhatia.
-
-Additional information about obtaining and preparing the dataset is provided in:
-
-`data/README.md`
+See `data/README.md` for data preparation instructions.
 
 ## Experimental Tasks
 
-### 1. Coarse-Grained Lexical POS Classification
+### Coarse-Grained Classification
 
-Penn Treebank-style POS tags are consolidated into five grammatical categories:
+Penn Treebank-style POS tags are mapped into five broad grammatical categories:
 
 - NOUN
 - VERB
@@ -60,19 +49,35 @@ Penn Treebank-style POS tags are consolidated into five grammatical categories:
 - ADV
 - FUNCTION
 
-### 2. Fine-Grained Lexical POS Classification
+### Fine-Grained Classification
 
-The original Penn Treebank-style POS categories are retained for categories represented by at least 50 observations.
+The fine-grained experiment retains Penn Treebank-style POS categories represented by at least 50 observations:
 
-### 3. Suffix Hold-Out Evaluation
+- NN
+- NNS
+- JJ
+- RB
+- VBG
+- VBN
+- VB
+- VBD
+- JJS
+- IN
 
-For each target suffix family, all lexical forms belonging to that family are excluded from model training and reserved for testing.
+### Suffix Hold-Out Evaluation
 
-The remaining non-held-out observations are divided into training and validation sets.
+Morphological transfer is evaluated by withholding complete suffix families from training.
 
-For the rule-based model, the rule corresponding to the target suffix is removed during evaluation. This produces the **Rule-Masked** baseline used in the primary comparison.
+The primary held-out suffixes are:
 
-Macro-F1 for each held-out family is calculated only over POS categories represented in that family's ground-truth test set.
+- `-tion`
+- `-ness`
+- `-ly`
+- `-ing`
+
+Each lexical item is assigned to its longest matching suffix family. For each experiment, all words belonging to the target suffix family are reserved as the test set.
+
+For the rule-based model, the corresponding target suffix rule is removed during primary hold-out evaluation. A full-rule condition is retained in the reproducibility outputs only as a diagnostic reference and is excluded from the primary model comparison.
 
 ## Computational Models
 
@@ -82,85 +87,75 @@ Predicts the most frequent POS category in the corresponding training partition.
 
 ### Rule-Based Suffix Baseline
 
-Uses manually specified suffix-to-POS mappings. When multiple suffixes match a lexical form, the longest matching suffix is used.
+Uses manually specified suffix-to-POS mappings. When multiple suffixes match, the longest matching suffix is used. Words without a matching rule receive the majority class.
 
 ### Statistical Suffix Model
 
-Learns empirical suffix-to-POS associations from the training data using suffixes of lengths 1–5 characters.
+Learns empirical suffix-label frequencies from the training data using suffixes of one to five characters. Prediction uses the longest matching suffix observed during training.
 
-### Character N-gram Model
+### Character N-gram Linear Model
 
-Represents lexical forms using hashed character n-grams of lengths 2–5 and performs classification using stochastic gradient descent with logistic loss.
+Represents words using hashed character n-grams of lengths 2–5 and performs classification using stochastic gradient descent with logistic loss.
+
+The hashing space contains 262,144 dimensions (`2^18`). The observed hash-collision statistics are provided in:
+
+`results/hash_collision_audit.json`
 
 ### Character-Level BiLSTM
 
-Represents each lexical form as a character sequence and learns a bidirectional recurrent representation for POS classification.
+Represents each word as a character sequence and uses a bidirectional LSTM to learn character-level lexical representations for POS classification.
 
 ## Data Partitioning
 
-For the standard coarse- and fine-grained experiments, the dataset is divided using stratified sampling:
+For the standard coarse- and fine-grained experiments, the data are divided using stratified sampling:
 
 - Training: 70%
 - Validation: 15%
 - Test: 15%
 - Random seed: 42
 
-For each suffix hold-out experiment:
-
-- All members of the target suffix family are reserved for testing.
-- The remaining observations are divided into 85% training and 15% validation data.
-- Random seed: 42
-
-All normalized lexical forms in the source dataset are unique, preventing exact lexical-form overlap between the standard training, validation, and test partitions.
+For each suffix hold-out experiment, the complete target suffix family is reserved for testing. The remaining observations are divided into 85% training and 15% validation data using stratified sampling and random seed 42.
 
 ## Evaluation
 
-The primary evaluation metric is **Macro-F1**. Accuracy is reported as a complementary metric for the standard classification experiments.
+**Macro-F1** is the primary evaluation metric because of substantial class imbalance. **Accuracy** is reported as a complementary measure.
 
-Statistical analysis includes:
+For standard coarse- and fine-grained experiments, 95% confidence intervals are estimated using 2,000 bootstrap repetitions.
 
-- 2,000 bootstrap repetitions for 95% confidence intervals
-- Exact Clopper-Pearson confidence intervals for FUNCTION-class recall
-- Paired randomization tests with 2,000 repetitions
-- Holm correction for multiple pairwise comparisons
+Because the FUNCTION category contains only 27 observations in the coarse-grained test partition, FUNCTION recall is additionally reported with an exact Clopper-Pearson 95% confidence interval.
 
-For suffix hold-out evaluation, zero-support POS categories are excluded from the family-specific Macro-F1 calculation.
+Adjacent model comparisons are evaluated using paired randomization tests with 2,000 repetitions:
+
+- Rule-based suffix vs. Statistical suffix
+- Statistical suffix vs. Char N-gram
+- Char N-gram vs. BiLSTM
+
+Raw p-values are adjusted using the Holm procedure.
+
+For suffix hold-out experiments, Macro-F1 is calculated only over POS classes represented in the ground-truth test subset for each suffix family.
 
 ## Repository Structure
 
 ```text
-context-free-lexical-pos-classification/
-│
+.
 ├── README.md
 ├── LICENSE
-├── .gitignore
-├── requirements.txt
 ├── CITATION.cff
-│
+├── requirements.txt
+├── .gitignore
+├── config/
+│   └── experimental_configuration.json
 ├── notebooks/
 │   └── lexical_pos_classification_experiments.ipynb
-│
-├── config/
-│   ├── experimental_configuration.json
-│
 ├── data/
 │   └── README.md
-│
-├── splits/
-│   ├── README.md
-│   └── standard_split_indices.csv
-│
-├── results/
-│   ├── coarse_test_predictions.csv
-│   ├── fine_test_predictions.csv
-│   ├── standard_results.csv
-│   ├── suffix_holdout_classwise.csv
-│   ├── suffix_holdout_per_family.csv
-│   ├── paired_tests_coarse.csv
-│   ├── paired_tests_fine.csv
-│   └── function_class_results.csv
-│   └── hash_collision_audit.csv
-│
-└── figures/
-    ├── convergence/
-    └── suffix_holdout_macro_f1.png
+└── results/
+    ├── standard_results.csv
+    ├── suffix_holdout_per_family.csv
+    ├── suffix_holdout_classwise.csv
+    ├── function_class_results.csv
+    ├── hash_collision_audit.json
+    ├── paired_randomization_tests.csv
+    └── predictions/
+        ├── coarse_test_predictions.csv
+        └── fine_test_predictions.csv
