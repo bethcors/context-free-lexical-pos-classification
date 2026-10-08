@@ -159,7 +159,7 @@ For suffix hold-out experiments, Macro-F1 is calculated only over POS classes re
 ├── figures/
 │   └── convergence/
         ├── bilstm_convergence_coarse.png
-        └── bilstm_convergence_fine.png
+        ├── bilstm_convergence_fine.png
         ├── sgd_convergence_course.png
         └── sgd_convergence_fine.png
 └── results/
