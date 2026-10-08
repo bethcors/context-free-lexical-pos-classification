@@ -7,6 +7,13 @@ This repository contains the reproducibility materials for the study:
 **Authors:** Lilibeth P. Coronel, Emmylou A. Emperador, and Gergie A. Ambato  
 **Affiliation:** Mindanao State University at Naawan, Philippines
 
+## Archival DOI
+
+The reproducibility materials associated with this study are permanently archived on Zenodo.
+
+**Version:** v1.0.0  
+**DOI:** https://doi.org/10.5281/zenodo.23227900
+
 ## Overview
 
 This study investigates how much part-of-speech (POS) information can be inferred from isolated English word forms without sentence context.
